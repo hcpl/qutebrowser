@@ -96,8 +96,8 @@ class KeyConfigParser(QObject):
         if self._configfile is None or not os.path.exists(self._configfile):
             self._load_default()
         else:
+            self._load_default()
             self._read(relaxed)
-            self._load_default(only_new=True)
         log.init.debug("Loaded bindings: {}".format(self.keybindings))
 
     def __str__(self):
@@ -389,7 +389,8 @@ class KeyConfigParser(QObject):
                                  "command!".format(line))
         else:
             assert self._cur_section is not None
-            self._add_binding(self._cur_section, line, self._cur_command)
+            self._add_binding(self._cur_section, line, self._cur_command,
+                force=True)
 
     def _add_binding(self, sectname, keychain, command, *, force=False):
         """Add a new binding from keychain to command in section sectname."""
